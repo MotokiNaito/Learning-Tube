@@ -1,12 +1,14 @@
 import React from 'react';
+import { Provider } from 'react-redux';
 
+import { store } from './redux/index';
 import CollectionsOverview from './components/collections-overview/collections-overview';
 
 const App: React.FC = () => {
   return (
-    <div className="App">
+    <Provider store={store}>
       <CollectionsOverview />
-    </div>
+    </Provider>
   );
 };
 

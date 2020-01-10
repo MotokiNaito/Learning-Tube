@@ -12,15 +12,15 @@ export interface FetchVideosAction {
   payload: Video[];
 }
 
-// const url = 'https://jsonplaceholder.typicode.com/todos';
+const url = 'https://jsonplaceholder.typicode.com/todos';
 
-// export const fetchTodos = () => {
-//   return async (dispatch: Dispatch) => {
-//     const response = await axios.get<Todo[]>(url);
+export const fetchVideos = () => {
+  return async (dispatch: Dispatch) => {
+    const response = await axios.get<Video[]>(url);
 
-//     dispatch<FetchTodoAction>({
-//       type: ActionTypes.fetchTodos,
-//       payload: response.data
-//     });
-//   };
-// };
+    dispatch<FetchVideosAction>({
+      type: ActionTypes.fetchVideos,
+      payload: response.data
+    });
+  };
+};

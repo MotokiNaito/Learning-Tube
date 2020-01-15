@@ -1,10 +1,18 @@
-import axios from 'axios';
 import { Dispatch } from 'redux';
 import { ActionTypes } from './types';
+import { youtubeAPI } from '../../apis/youtube';
+const KEY = 'AIzaSyCPz3HeegLAsbaNS77ocnppnbLENs-781Y';
 
 export interface Video {
-  id: number;
-  title: string;
+  etag: string;
+  snippet: {
+    title: string;
+    thumbnails: {
+      medium: {
+        url: string;
+      };
+    };
+  };
 }
 
 export interface FetchVideosAction {
@@ -12,15 +20,22 @@ export interface FetchVideosAction {
   payload: Video[];
 }
 
-const url = 'https://jsonplaceholder.typicode.com/todos';
-
 export const fetchVideos = () => {
   return async (dispatch: Dispatch) => {
-    const response = await axios.get<Video[]>(url);
+    const response = await youtubeAPI.get('/search', {
+      params: {
+        q: 'React.js',
+        part: 'snippet',
+        maxResults: 5,
+        key: KEY
+      }
+    });
+
+    console.log(response);
 
     dispatch<FetchVideosAction>({
       type: ActionTypes.fetchVideos,
-      payload: response.data
+      payload: response.data.items
     });
   };
 };

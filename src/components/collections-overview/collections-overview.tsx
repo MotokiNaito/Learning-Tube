@@ -9,13 +9,20 @@ interface Props {
 }
 
 const CollectionsOverview: React.FC<Props> = (props: Props) => {
+  const { fetchVideos } = props;
   useEffect(() => {
-    props.fetchVideos();
+    fetchVideos();
+    // eslint-disable-next-line
   }, []);
 
   const renderList = (): JSX.Element[] => {
     return props.videos.map((video: Video) => {
-      return <div key={video.id}>{video.title}</div>;
+      return (
+        <a href="https://www.youtube.com/watch?v=DLX62G4lc44" key={video.etag}>
+          <h1>{video.snippet.title}</h1>
+          <img src={video.snippet.thumbnails.medium.url} alt={video.snippet.title} />
+        </a>
+      );
     });
   };
 

@@ -1,7 +1,7 @@
 import { Dispatch } from 'redux';
 import { ActionTypes } from './types';
 import { youtubeAPI } from '../../apis/youtube';
-const KEY = 'AIzaSyCPz3HeegLAsbaNS77ocnppnbLENs-781Y';
+const KEY = '';
 
 export interface Video {
   etag: string;

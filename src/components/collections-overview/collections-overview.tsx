@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { fetchVideos, Video } from '../../redux/videos/actions';
-import { StoreState } from '../../redux/index';
+import { Video, VideosState } from '../../redux/videos/types';
+import { fetchVideos } from '../../redux/videos/actions';
 
 interface Props {
   videos: Video[];
-  fetchVideos: Function;
+  fetchVideos: () => void;
 }
 
 const CollectionsOverview: React.FC<Props> = (props: Props) => {
@@ -18,9 +18,12 @@ const CollectionsOverview: React.FC<Props> = (props: Props) => {
   const renderList = (): JSX.Element[] => {
     return props.videos.map((video: Video) => {
       return (
-        <a href="https://www.youtube.com/watch?v=DLX62G4lc44" key={video.etag}>
-          <h1>{video.snippet.title}</h1>
-          <img src={video.snippet.thumbnails.medium.url} alt={video.snippet.title} />
+        //https://www.youtube.com/playlist?list=PLC3y8-rFHvwgg3vaYJgHGnModB54rxOk3
+        <a href="https://www.youtube.com/watch?v=DLX62G4lc44" key={video.id}>
+          <h1>{video.title}</h1>
+          {video.items.map(item => {
+            return <img src={item.snippet.thumbnails.medium.url} alt={item.snippet.title} />;
+          })}
         </a>
       );
     });
@@ -34,7 +37,7 @@ const CollectionsOverview: React.FC<Props> = (props: Props) => {
   );
 };
 
-const mapStateToProps = ({ videos }: StoreState): { videos: Video[] } => {
+const mapStateToProps = ({ videos }: VideosState): { videos: Video[] } => {
   return { videos };
 };
 

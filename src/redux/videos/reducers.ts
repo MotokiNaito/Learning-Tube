@@ -1,10 +1,15 @@
-import { Video } from './actions';
-import { Action, ActionTypes } from './types';
+import { FETCH_VIDEOS, VideosState, VideoActionTypes } from './types';
 
-export const videosReducer = (state: Video[] = [], action: Action) => {
+const initialState: VideosState = {
+  videos: []
+};
+
+export const videosReducer = (state = initialState, action: VideoActionTypes): VideosState => {
   switch (action.type) {
-    case ActionTypes.fetchVideos:
-      return action.payload;
+    case FETCH_VIDEOS:
+      return {
+        videos: action.payload
+      };
     default:
       return state;
   }

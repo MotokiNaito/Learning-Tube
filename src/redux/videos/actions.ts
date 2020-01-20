@@ -1,28 +1,13 @@
 import { Dispatch } from 'redux';
-import { ActionTypes } from './types';
+import { FETCH_VIDEOS, FetchVideosAction } from './types';
 import { youtubeAPI } from '../../apis/youtube';
-const KEY = '';
+const KEY = process.env.REACT_APP_YOUTUBE_API_KEY;
 
-export interface Video {
-  etag: string;
-  snippet: {
-    title: string;
-    thumbnails: {
-      medium: {
-        url: string;
-      };
-    };
-  };
-}
-
-export interface FetchVideosAction {
-  type: ActionTypes.fetchVideos;
-  payload: Video[];
-}
+// const Categories = ['React.js', 'Javascript', 'Node.js'];
 
 export const fetchVideos = () => {
   return async (dispatch: Dispatch) => {
-    const response = await youtubeAPI.get('/search', {
+    const responseReact = await youtubeAPI.get('/search', {
       params: {
         q: 'React.js',
         part: 'snippet',
@@ -31,11 +16,31 @@ export const fetchVideos = () => {
       }
     });
 
-    console.log(response);
+    const responseJavascript = await youtubeAPI.get('/search', {
+      params: {
+        q: 'Javascript',
+        part: 'snippet',
+        maxResults: 5,
+        key: KEY
+      }
+    });
+
+    const fetchedVideos = [
+      {
+        id: 1,
+        items: responseReact.data.items,
+        title: 'React'
+      },
+      {
+        id: 2,
+        items: responseJavascript.data.items,
+        title: 'Javascript'
+      }
+    ];
 
     dispatch<FetchVideosAction>({
-      type: ActionTypes.fetchVideos,
-      payload: response.data.items
+      type: FETCH_VIDEOS,
+      payload: fetchedVideos
     });
   };
 };

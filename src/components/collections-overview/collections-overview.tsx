@@ -19,7 +19,6 @@ const CollectionsOverview: React.FC<Props> = (props: Props) => {
   const renderList = (): JSX.Element[] => {
     return videos.map((video: Video) => {
       return (
-        //https://www.youtube.com/playlist?list=PLC3y8-rFHvwgg3vaYJgHGnModB54rxOk3
         <a href="https://www.youtube.com/watch?v=DLX62G4lc44" key={video.id}>
           <h1>{video.title}</h1>
           {video.items.map(item => {

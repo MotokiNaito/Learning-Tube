@@ -1,10 +1,12 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
 
-import { videosReducer } from './videos/reducers';
+import { videoListReducer } from './videos/reducers';
+// import { loginReducer } from './login/reducers';
 
 const rootReducers = combineReducers({
-  videos: videosReducer
+  videoList: videoListReducer
+  // login: loginReducer
 });
 
 export const store = createStore(rootReducers, applyMiddleware(thunk));

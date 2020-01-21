@@ -4,7 +4,7 @@ const initialState: VideosState = {
   videos: []
 };
 
-export const videosReducer = (state = initialState, action: VideoActionTypes): VideosState => {
+export const videoListReducer = (state = initialState, action: VideoActionTypes): VideosState => {
   switch (action.type) {
     case FETCH_VIDEOS:
       return {

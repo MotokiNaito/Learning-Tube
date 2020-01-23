@@ -1,23 +1,42 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { ReactComponent as Logo } from '../../static/img/Learning-Tube.svg';
+
 import './header.css';
 
-interface Props {
+type Props = {
   currentUser: string;
-}
+};
 
 const Header: React.FC<Props> = ({ currentUser }) => {
   return (
     <header>
-      <div className="Logo">Learning-Tube</div>
-      <nav>
+      <div className="logo">
+        <Link to="/">
+          <Logo />
+        </Link>
+      </div>
+      <nav className="main-nav">
         <ul>
           {currentUser ? (
             <>
-              <li>My List</li>
-              <li>Profile</li>
+              <li>
+                <Link to="/">Home</Link>
+              </li>
+              <li>
+                <Link to="/my-list">My List</Link>
+              </li>
+              <li>
+                <Link to="/profile">Profile</Link>
+              </li>
+              <li>
+                <Link to="/sign-out">Sign Out</Link>
+              </li>
             </>
           ) : (
-            <li>Sign In</li>
+            <li>
+              <Link to="/sign-in">Sign In</Link>
+            </li>
           )}
         </ul>
       </nav>

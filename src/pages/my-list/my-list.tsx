@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
 
-const MyList: FC = () => (
+const MyListPage: FC = () => (
   <>
     <main>My List</main>
   </>
 );
 
-export default MyList;
+export default MyListPage;

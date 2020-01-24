@@ -6,6 +6,7 @@ export interface Video {
 
 export interface VideosState {
   videos: Video[];
+  isLoading: boolean;
 }
 
 export const FETCH_VIDEOS = 'FETCH_VIDEOS';

@@ -7,13 +7,28 @@ export interface Video {
 export interface VideosState {
   videos: Video[];
   isLoading: boolean;
+  errorMessage: string | undefined;
 }
 
-export const FETCH_VIDEOS = 'FETCH_VIDEOS';
+export const VideoActionTypesObject = {
+  FETCH_VIDEOS_START: 'FETCH_VIDEOS_START',
+  FETCH_VIDEOS_SUCCESS: 'FETCH_VIDEOS_SUCCESS',
+  FETCH_VIDEOS_FAILURE: 'FETCH_VIDEOS_FAILURE'
+};
 
-export interface FetchVideosAction {
-  type: typeof FETCH_VIDEOS;
+interface FetchVideosStartAction {
+  type: typeof VideoActionTypesObject.FETCH_VIDEOS_START;
+  payload?: any;
+}
+
+interface FetchVideosSuccessAction {
+  type: typeof VideoActionTypesObject.FETCH_VIDEOS_SUCCESS;
   payload: Video[];
 }
 
-export type VideoActionTypes = FetchVideosAction;
+interface FetchVideosFailureAction {
+  type: typeof VideoActionTypesObject.FETCH_VIDEOS_FAILURE;
+  payload: string;
+}
+
+export type VideoActionTypes = FetchVideosSuccessAction | FetchVideosStartAction | FetchVideosFailureAction;

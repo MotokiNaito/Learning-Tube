@@ -2,20 +2,21 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import { Video } from '../../redux/videos/types';
-import { fetchVideos } from '../../redux/videos/actions';
+import { fetchVideosStartAsync } from '../../redux/videos/actions';
 import { GlobalState } from '../../redux/types';
 
 import CategoryCollection from '../category-collection/category-collection';
 
 type Props = {
   videos: Video[];
-  fetchVideos: () => void;
+  isLoading: boolean;
+  fetchVideosStartAsync: () => void;
 };
 
 const CollectionsOverview: React.FC<Props> = (props: Props) => {
-  const { fetchVideos, videos } = props;
+  const { fetchVideosStartAsync, videos, isLoading } = props;
   useEffect(() => {
-    fetchVideos();
+    fetchVideosStartAsync();
     // eslint-disable-next-line
   }, []);
 
@@ -25,13 +26,14 @@ const CollectionsOverview: React.FC<Props> = (props: Props) => {
     });
   };
 
-  return <div>{renderList()}</div>;
+  return <div>{isLoading ? 'Loading Now' : renderList()}</div>;
 };
 
 const mapStateToProps = (state: GlobalState) => {
   return {
-    videos: state.videoList.videos
+    videos: state.videoList.videos,
+    isLoading: state.videoList.isLoading
   };
 };
 
-export default connect(mapStateToProps, { fetchVideos })(CollectionsOverview);
+export default connect(mapStateToProps, { fetchVideosStartAsync })(CollectionsOverview);

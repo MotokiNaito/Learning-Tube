@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 
 const SignInAndSignUpPage: FC = () => (
   <>
-    <main>Sign In</main>
+    <main>Sign In!</main>
   </>
 );
 
